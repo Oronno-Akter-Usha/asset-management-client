@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import NavLinks from "./NavLinks";
+import Button from "../Button/Button";
 
 const Navbar = () => {
   const navLinks = (
@@ -49,9 +50,7 @@ const Navbar = () => {
 
           <div className="text-black">
             <Link to={"/login"}>
-              <button className="btn bg-gradient  border-none bg-gradient rounded-lg">
-                Login
-              </button>
+              <Button> Login</Button>
             </Link>
           </div>
         </div>
