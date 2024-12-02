@@ -60,7 +60,7 @@ const AuthProvider = ({ children }) => {
       { email },
       { withCredentials: true }
     );
-    console.log(import.meta.env.VITE_API_URL);
+
     return data;
   };
 
@@ -86,6 +86,7 @@ const AuthProvider = ({ children }) => {
     logOut,
     googleSignIn,
     loading,
+    setLoading,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
