@@ -7,8 +7,10 @@ import Button from "../../components/Shared/Button/Button";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useState } from "react";
 import axios from "axios";
+import useScroll from "../../hooks/useScroll";
 
 const JoinAsEmployee = () => {
+  useScroll();
   const [imagePreview, setImagePreview] = useState();
   const [imageText, setImageText] = useState("Upload Image");
   const {
