@@ -6,10 +6,12 @@ import useScroll from "../../hooks/useScroll";
 const Home = () => {
   useScroll();
   return (
-    <div className="space-y-32">
+    <div className="space-y-14 md:space-y-32">
       <Banner />
-      <About />
-      <Packages />
+      <div className="space-y-14 md:space-y-32 mx-10">
+        <About />
+        <Packages />
+      </div>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import Card from "./Card";
 const Packages = () => {
   return (
     <div>
-      <div className="text-center space-y-5 mb-5 md:mb-16">
+      <div className="text-center space-y-5 mb-5 md:mb-16 mx-10">
         <h2 className="font-medium text-2xl md:text-4xl text-secondary">
           Choose the Perfect Plan for Your Team
         </h2>
