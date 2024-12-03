@@ -3,11 +3,11 @@ import about from "../../assets/about.json";
 
 const About = () => {
   return (
-    <div className="md:flex items-center gap-10 mt-10">
+    <div className="md:flex items-center gap-10">
       <div className="md:w-1/2">
         <Lottie animationData={about} loop={true} speed={0.5}></Lottie>
       </div>
-      <div className="w-full md:w-1/2 md:mr-10 mt-10 px-5">
+      <div className="w-full md:w-1/2 md:mr-10 px-5">
         <h2 className="font-semibold text-2xl md:text-3xl mb-5 text-secondary">
           About Us
         </h2>

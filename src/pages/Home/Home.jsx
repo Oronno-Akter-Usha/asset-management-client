@@ -6,7 +6,7 @@ import useScroll from "../../hooks/useScroll";
 const Home = () => {
   useScroll();
   return (
-    <div>
+    <div className="space-y-32">
       <Banner />
       <About />
       <Packages />
