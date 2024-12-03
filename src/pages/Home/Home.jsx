@@ -1,5 +1,6 @@
 import About from "../../components/Home/About";
 import Banner from "../../components/Home/Banner";
+import Packages from "../../components/Home/Packages";
 import useScroll from "../../hooks/useScroll";
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
     <div>
       <Banner />
       <About />
+      <Packages />
     </div>
   );
 };

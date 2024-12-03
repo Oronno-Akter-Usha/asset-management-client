@@ -10,7 +10,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`px-4 py-2 rounded-lg font-medium md:font-semibold text-white bg-gradient-to-br from-secondary to-primary ${className} ${
+      className={`px-4 py-2 rounded-md font-medium md:font-semibold text-white bg-gradient-to-br from-secondary to-primary ${className} ${
         disabled ? "opacity-50 cursor-not-allowed" : ""
       }`}
     >

@@ -100,9 +100,11 @@ const JoinAsEmployee = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen mt-10">
-      <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-white text-gray-900">
+      <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10  text-gray-900 backdrop-blur-sm bg-white/30 border border-primary">
         <div className="mb-8 text-center">
-          <h1 className="my-3 text-4xl font-bold">Join As Employee </h1>
+          <h1 className="my-3 text-4xl font-bold text-secondary">
+            Join As Employee
+          </h1>
         </div>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-4">
@@ -211,7 +213,7 @@ const JoinAsEmployee = () => {
         <button
           disabled={loading}
           onClick={handleGoogleSignIn}
-          className="disabled:cursor-not-allowed flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
+          className="disabled:cursor-not-allowed flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer rounded-md"
         >
           <FcGoogle size={32} />
 
