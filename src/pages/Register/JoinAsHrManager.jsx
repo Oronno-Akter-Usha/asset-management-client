@@ -8,6 +8,8 @@ import { useState } from "react";
 import axios from "axios";
 import useScroll from "../../hooks/useScroll";
 import Packages from "../../components/Register/JoinAsHrManager/Packages";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const JoinAsHrManager = () => {
   useScroll();
@@ -17,6 +19,7 @@ const JoinAsHrManager = () => {
   const [companyImagePreview, setCompanyImagePreview] = useState();
   const [companyImageText, setCompanyImageText] = useState("Upload Image");
   const { createUser, updateUserProfile, loading, setLoading } = useAuth();
+  const [startDate, setStartDate] = useState(new Date());
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state || "/";
@@ -29,8 +32,8 @@ const JoinAsHrManager = () => {
     const password = form.password.value;
     const image = form.image.files[0];
     const role = "HrManager";
-    const companyName = form.companyName.value;
-    const companyLogo = form.companyImage.files[0];
+    const company_name = form.company_name.value;
+    const company_logo = form.companyImage.files[0];
 
     try {
       setLoading(true);
@@ -40,7 +43,7 @@ const JoinAsHrManager = () => {
       console.log("Image uploaded:", image_url);
 
       // Upload company logo
-      const company_logo_url = await imageUpload(companyLogo);
+      const company_logo_url = await imageUpload(company_logo);
       console.log("Company logo uploaded:", company_logo_url);
 
       // Firebase User Registration
@@ -56,9 +59,10 @@ const JoinAsHrManager = () => {
         image_url,
         email,
         role,
-        companyName,
+        company_name,
         company_logo_url,
         package: selectedPackage,
+        date_of_birth: startDate,
       };
 
       // Save user in database
@@ -163,15 +167,28 @@ const JoinAsHrManager = () => {
               </div>
             </div>
 
+            {/*date of birth input */}
+            <div className="w-full">
+              <label htmlFor="email" className="block mb-2 text-sm">
+                Date of birth
+              </label>
+              <DatePicker
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-100 text-gray-900"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                wrapperClassName="w-full"
+              />
+            </div>
+
             {/*company name input */}
             <div>
               <label htmlFor="email" className="block mb-2 text-sm">
-                CompanyName
+                Company Name
               </label>
               <input
                 type="text"
-                name="companyName"
-                id="companyName"
+                name="company_name"
+                id="company_name"
                 required
                 placeholder="Enter Your Name Here"
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-100 text-gray-900"

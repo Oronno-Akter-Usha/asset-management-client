@@ -8,11 +8,14 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useState } from "react";
 import axios from "axios";
 import useScroll from "../../hooks/useScroll";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const JoinAsEmployee = () => {
   useScroll();
   const [imagePreview, setImagePreview] = useState();
   const [imageText, setImageText] = useState("Upload Image");
+  const [startDate, setStartDate] = useState(new Date());
   const {
     createUser,
     signInWithGoogle,
@@ -32,8 +35,8 @@ const JoinAsEmployee = () => {
     const password = form.password.value;
     const image = form.image.files[0];
     const role = "employee";
-    const companyName = "";
-    const addedByHrManager = "";
+    const company_name = "";
+    const added_by_hrManager = "";
 
     try {
       setLoading(true);
@@ -54,9 +57,10 @@ const JoinAsEmployee = () => {
         name,
         email,
         role,
-        companyName,
-        addedByHrManager,
+        company_name,
+        added_by_hrManager,
         image_url,
+        date_of_birth: startDate,
       };
 
       // Save user in database
@@ -160,6 +164,19 @@ const JoinAsEmployee = () => {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/*date of birth input */}
+            <div className="w-full">
+              <label htmlFor="email" className="block mb-2 text-sm">
+                Date of birth
+              </label>
+              <DatePicker
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-100 text-gray-900"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                wrapperClassName="w-full"
+              />
             </div>
 
             {/* email input */}
