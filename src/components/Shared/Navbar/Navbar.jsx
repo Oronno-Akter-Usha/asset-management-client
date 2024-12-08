@@ -7,7 +7,10 @@ const Navbar = () => {
     <>
       <NavLinks title="Home" pathName="/"></NavLinks>
       <NavLinks title="Join as Employee" pathName="/JoinAsEmployee"></NavLinks>
-      <NavLinks title="Join as HR Manager" pathName="/JoinAsHR"></NavLinks>
+      <NavLinks
+        title="Join as HR Manager"
+        pathName="/JoinAsHrManager"
+      ></NavLinks>
     </>
   );
 

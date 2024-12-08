@@ -1,5 +1,4 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { imageUpload } from "../../api/utils";
@@ -8,18 +7,16 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useState } from "react";
 import axios from "axios";
 import useScroll from "../../hooks/useScroll";
+import Packages from "../../components/Register/JoinAsHrManager/Packages";
 
-const JoinAsEmployee = () => {
+const JoinAsHrManager = () => {
   useScroll();
+  const [selectedPackage, setSelectedPackage] = useState([0]);
   const [imagePreview, setImagePreview] = useState();
   const [imageText, setImageText] = useState("Upload Image");
-  const {
-    createUser,
-    signInWithGoogle,
-    updateUserProfile,
-    loading,
-    setLoading,
-  } = useAuth();
+  const [companyImagePreview, setCompanyImagePreview] = useState();
+  const [companyImageText, setCompanyImageText] = useState("Upload Image");
+  const { createUser, updateUserProfile, loading, setLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state || "/";
@@ -31,9 +28,9 @@ const JoinAsEmployee = () => {
     const email = form.email.value;
     const password = form.password.value;
     const image = form.image.files[0];
-    const role = "employee";
-    const companyName = "";
-    const addedByHrManager = "";
+    const role = "HrManager";
+    const companyName = form.companyName.value;
+    const companyLogo = form.companyImage.files[0];
 
     try {
       setLoading(true);
@@ -41,6 +38,10 @@ const JoinAsEmployee = () => {
       // Upload image
       const image_url = await imageUpload(image);
       console.log("Image uploaded:", image_url);
+
+      // Upload company logo
+      const company_logo_url = await imageUpload(companyLogo);
+      console.log("Company logo uploaded:", company_logo_url);
 
       // Firebase User Registration
       const result = await createUser(email, password);
@@ -52,11 +53,12 @@ const JoinAsEmployee = () => {
       // Prepare user data for database
       const userData = {
         name,
+        image_url,
         email,
         role,
         companyName,
-        addedByHrManager,
-        image_url,
+        company_logo_url,
+        package: selectedPackage,
       };
 
       // Save user in database
@@ -80,30 +82,29 @@ const JoinAsEmployee = () => {
     }
   };
 
-  // handle google signin
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-      navigate(from);
-      toast.success("SignUp Successful");
-    } catch (err) {
-      console.log(err);
-      toast.error(err.message);
-    }
-  };
-
   // handle image change
   const handleImage = (image) => {
     setImagePreview(URL.createObjectURL(image));
     setImageText(image.name);
   };
+  // handle company image change
+  const handleCompanyImage = (image) => {
+    setCompanyImagePreview(URL.createObjectURL(image));
+    setCompanyImageText(image.name);
+  };
+
+  // handle package
+  const handlePackageSelect = (pkg) => {
+    setSelectedPackage(pkg); // Update state
+    console.log("Selected package:", pkg); // Log the package directly
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen mt-10">
-      <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10  text-gray-900 bg-white border border-primary">
+      <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10  text-gray-900  bg-white border border-primary">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold text-secondary">
-            Join As Employee
+            Join As HR Manager
           </h1>
         </div>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -124,7 +125,7 @@ const JoinAsEmployee = () => {
               />
             </div>
 
-            {/* user image input */}
+            {/*user image input */}
             <div>
               <label htmlFor="image" className="block mb-2 text-sm">
                 Select Image:
@@ -155,6 +156,60 @@ const JoinAsEmployee = () => {
                             "....." +
                             imageText.split(".")[1]
                           : imageText}
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/*company name input */}
+            <div>
+              <label htmlFor="email" className="block mb-2 text-sm">
+                CompanyName
+              </label>
+              <input
+                type="text"
+                name="companyName"
+                id="companyName"
+                required
+                placeholder="Enter Your Name Here"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-100 text-gray-900"
+                data-temp-mail-org="0"
+              />
+            </div>
+
+            {/* company image input */}
+            <div>
+              <label htmlFor="image" className="block mb-2 text-sm">
+                Company Logo:
+              </label>
+              <div className="  bg-gray-100 w-full  m-auto rounded-lg">
+                <div className="file_upload px-5 py-3 relative border-4 border-dotted border-gray-300 rounded-lg w-full">
+                  <div className="flex flex-col w-max mx-auto text-center">
+                    {companyImagePreview && (
+                      <img
+                        src={companyImagePreview}
+                        className="w-[280px] h-[65px] mb-1"
+                      />
+                    )}
+
+                    <label>
+                      <input
+                        className="text-sm cursor-pointer w-36 hidden"
+                        type="file"
+                        onChange={(e) => handleCompanyImage(e.target.files[0])}
+                        name="companyImage"
+                        id="companyImage"
+                        accept="image/*"
+                        hidden
+                      />
+                      <div className="bg-white text-primary border border-primary font-semibold cursor-pointer p-1 px-3 rounded">
+                        {companyImageText.length > 20
+                          ? companyImageText.split(".")[0].slice(0, 15) +
+                            "....." +
+                            companyImageText.split(".")[1]
+                          : companyImageText}
                       </div>
                     </label>
                   </div>
@@ -197,10 +252,13 @@ const JoinAsEmployee = () => {
             </div>
           </div>
 
+          {/* packages */}
+          <Packages onPackageSelect={handlePackageSelect} />
+
           <div>
             <Button
               type="submit"
-              className="bg-primary w-full rounded-md py-3 text-white"
+              className=" w-full rounded-md py-3 text-white"
             >
               {loading ? (
                 <AiOutlineLoading3Quarters className="animate-spin m-auto" />
@@ -210,25 +268,7 @@ const JoinAsEmployee = () => {
             </Button>
           </div>
         </form>
-        <div className="flex items-center pt-4 space-x-1">
-          <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
-          <p className="px-3 text-sm dark:text-gray-400">
-            Signup with social accounts
-          </p>
-          <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
-        </div>
-
-        {/* google login */}
-        <button
-          disabled={loading}
-          onClick={handleGoogleSignIn}
-          className="disabled:cursor-not-allowed flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer rounded-md"
-        >
-          <FcGoogle size={32} />
-
-          <p>Continue with Google</p>
-        </button>
-        <p className="px-6 text-sm text-center text-gray-400">
+        <p className="px-6 text-sm text-center text-gray-400 mt-5">
           Already have an account?
           <Link
             to="/login"
@@ -243,4 +283,4 @@ const JoinAsEmployee = () => {
   );
 };
 
-export default JoinAsEmployee;
+export default JoinAsHrManager;

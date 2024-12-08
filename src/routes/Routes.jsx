@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../layouts/Main";
 import Home from "../pages/Home/Home";
 import JoinAsEmployee from "../pages/Register/JoinAsEmployee";
+import JoinAsHrManager from "../pages/Register/JoinAsHrManager";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: "/joinAsEmployee",
         element: <JoinAsEmployee />,
+      },
+      {
+        path: "/joinAsHrManager",
+        element: <JoinAsHrManager />,
       },
     ],
   },
