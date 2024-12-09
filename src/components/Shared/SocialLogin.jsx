@@ -19,7 +19,7 @@ const SocialLogin = () => {
         const userData = {
           email: result.user?.email,
           name: result.user?.displayName,
-          photo: result.user?.photoURL,
+          image_url: result.user?.photoURL,
           role: "employee",
           company_name: "",
           added_by_hrManager: "",

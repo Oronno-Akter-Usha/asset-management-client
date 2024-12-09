@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home";
 import JoinAsEmployee from "../pages/Register/JoinAsEmployee";
 import JoinAsHrManager from "../pages/Register/JoinAsHrManager";
 import Login from "./../pages/Login/Login";
+import AddEmployee from "../pages/HrManager/AddEmployee";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,12 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+
+      // HR Manager
+      {
+        path: "/add-employee",
+        element: <AddEmployee />,
       },
     ],
   },

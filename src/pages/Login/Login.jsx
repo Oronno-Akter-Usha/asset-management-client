@@ -1,9 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
-import { TbFidgetSpinner } from "react-icons/tb";
 import SocialLogin from "../../components/Shared/SocialLogin";
 import Button from "../../components/Shared/Button/Button";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const Login = () => {
   const { signIn, loading, setLoading } = useAuth();
@@ -77,7 +77,7 @@ const Login = () => {
           <div>
             <Button type="submit" className=" w-full">
               {loading ? (
-                <TbFidgetSpinner className="animate-spin m-auto" />
+                <AiOutlineLoading3Quarters className="animate-spin m-auto" />
               ) : (
                 "Log In"
               )}
