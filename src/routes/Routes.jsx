@@ -6,6 +6,7 @@ import JoinAsHrManager from "../pages/Register/JoinAsHrManager";
 import Login from "./../pages/Login/Login";
 import AddEmployee from "../pages/HrManager/AddEmployee";
 import MyEmployee from "../pages/HrManager/MyEmployee";
+import AddAsset from "../pages/HrManager/AddAsset";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/my-employee",
         element: <MyEmployee />,
+      },
+      {
+        path: "/add-asset",
+        element: <AddAsset />,
       },
     ],
   },
