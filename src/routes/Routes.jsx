@@ -3,6 +3,7 @@ import Main from "../layouts/Main";
 import Home from "../pages/Home/Home";
 import JoinAsEmployee from "../pages/Register/JoinAsEmployee";
 import JoinAsHrManager from "../pages/Register/JoinAsHrManager";
+import Login from "./../pages/Login/Login";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/joinAsHrManager",
         element: <JoinAsHrManager />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
     ],
   },

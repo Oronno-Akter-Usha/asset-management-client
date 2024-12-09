@@ -273,10 +273,7 @@ const JoinAsHrManager = () => {
           <Packages onPackageSelect={handlePackageSelect} />
 
           <div>
-            <Button
-              type="submit"
-              className=" w-full rounded-md py-3 text-white"
-            >
+            <Button type="submit" className=" w-full">
               {loading ? (
                 <AiOutlineLoading3Quarters className="animate-spin m-auto" />
               ) : (

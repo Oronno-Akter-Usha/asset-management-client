@@ -195,10 +195,7 @@ const JoinAsEmployee = () => {
           </div>
 
           <div>
-            <Button
-              type="submit"
-              className="bg-primary w-full rounded-md py-3 text-white"
-            >
+            <Button type="submit" className=" w-full">
               {loading ? (
                 <AiOutlineLoading3Quarters className="animate-spin m-auto" />
               ) : (

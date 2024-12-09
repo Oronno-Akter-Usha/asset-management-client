@@ -26,7 +26,7 @@ const SocialLogin = () => {
         };
         axiosCommon.post("/user", userData).then(() => {
           navigate(from);
-          toast.success("SignUp Successfully");
+          toast.success("SignIn Successfully");
         });
       })
       .catch((error) => {
