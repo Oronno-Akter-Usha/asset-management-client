@@ -3,28 +3,19 @@ import NavLinks from "./NavLinks";
 import Button from "../Button/Button";
 import useRole from "./../../../hooks/useRole";
 import EmployeeNavbar from "./EmployeeNavbar";
-import { ClipLoader } from "react-spinners";
 import HrManagerNavbar from "./HrManagerNavbar";
 import useAuth from "../../../hooks/useAuth";
+import LoadingSpinner from "../LoadingSpinner";
 
 const Navbar = () => {
   const { loading } = useAuth();
   const [role] = useRole();
-  if (loading) {
-    // Display a loading spinner while the role is being determined
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <ClipLoader color="#3498db" size={50} />
-      </div>
-    );
-  }
+  if (loading) return <LoadingSpinner />;
 
   if (role === "employee") {
-    // Render only the Employee Navbar for employees
     return <EmployeeNavbar />;
   }
   if (role === "hrManager") {
-    // Render only the Employee Navbar for employees
     return <HrManagerNavbar />;
   }
   const navLinks = (

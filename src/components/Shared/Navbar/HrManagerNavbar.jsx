@@ -11,9 +11,9 @@ const HrManagerNavbar = () => {
         <details className="bg-transparent">
           <summary className="p-0">Asset</summary>
           <ul className=" bg-base-100 rounded-t-none">
-            <NavLinks title="Asset List" pathName="/assetList" />
+            <NavLinks title="Asset List" pathName="/asset-list" />
             <br />
-            <NavLinks title="Add an Asset" pathName="/addAsset" />
+            <NavLinks title="Add an Asset" pathName="/add-asset" />
           </ul>
         </details>
       </li>
@@ -21,13 +21,13 @@ const HrManagerNavbar = () => {
         <details className="bg-transparent">
           <summary className="p-0">Employee</summary>
           <ul className=" bg-base-100 rounded-t-none">
-            <NavLinks title="My Employee List" pathName="/myEmployee" />
+            <NavLinks title="My Employee List" pathName="/my-employee" />
             <br />
-            <NavLinks title=" Add an Employee" pathName="/addEmployee" />
+            <NavLinks title=" Add an Employee" pathName="/add-employee" />
           </ul>
         </details>
       </li>
-      <NavLinks title=" All Requests" pathName="/myTeam"></NavLinks>
+      <NavLinks title=" All Requests" pathName="/all-requests"></NavLinks>
     </>
   );
   return (
