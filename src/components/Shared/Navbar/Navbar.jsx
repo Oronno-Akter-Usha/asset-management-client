@@ -1,8 +1,25 @@
 import { Link } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import Button from "../Button/Button";
+import useRole from "./../../../hooks/useRole";
+import EmployeeNavbar from "./EmployeeNavbar";
+import { ClipLoader } from "react-spinners";
 
 const Navbar = () => {
+  const [role, isLoading] = useRole();
+  if (isLoading) {
+    // Display a loading spinner while the role is being determined
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <ClipLoader color="#3498db" size={50} />
+      </div>
+    );
+  }
+
+  if (role === "employee") {
+    // Render only the Employee Navbar for employees
+    return <EmployeeNavbar />;
+  }
   const navLinks = (
     <>
       <NavLinks title="Home" pathName="/"></NavLinks>
