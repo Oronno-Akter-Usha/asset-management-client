@@ -1,28 +1,23 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { imageUpload } from "../../api/utils";
 import Button from "../../components/Shared/Button/Button";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useState } from "react";
-import axios from "axios";
 import useScroll from "../../hooks/useScroll";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
+import SocialLogin from "../../components/Shared/SocialLogin";
 
 const JoinAsEmployee = () => {
   useScroll();
+  const axiosCommon = useAxiosCommon();
   const [imagePreview, setImagePreview] = useState();
   const [imageText, setImageText] = useState("Upload Image");
   const [startDate, setStartDate] = useState(new Date());
-  const {
-    createUser,
-    signInWithGoogle,
-    updateUserProfile,
-    loading,
-    setLoading,
-  } = useAuth();
+  const { createUser, updateUserProfile, loading, setLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state || "/";
@@ -64,10 +59,7 @@ const JoinAsEmployee = () => {
       };
 
       // Save user in database
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/user`,
-        userData
-      );
+      const response = await axiosCommon.post("/user", userData);
       console.log(response);
 
       if (response.data.insertedId) {
@@ -81,18 +73,6 @@ const JoinAsEmployee = () => {
       toast.error(err.response?.data?.message || "Something went wrong!");
     } finally {
       setLoading(false);
-    }
-  };
-
-  // handle google signin
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-      navigate(from);
-      toast.success("SignUp Successful");
-    } catch (err) {
-      console.log(err);
-      toast.error(err.message);
     }
   };
 
@@ -236,15 +216,8 @@ const JoinAsEmployee = () => {
         </div>
 
         {/* google login */}
-        <button
-          disabled={loading}
-          onClick={handleGoogleSignIn}
-          className="disabled:cursor-not-allowed flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer rounded-md"
-        >
-          <FcGoogle size={32} />
+        <SocialLogin />
 
-          <p>Continue with Google</p>
-        </button>
         <p className="px-6 text-sm text-center text-gray-400">
           Already have an account?
           <Link
