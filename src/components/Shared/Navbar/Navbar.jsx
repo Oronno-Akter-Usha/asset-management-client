@@ -9,8 +9,9 @@ import LoadingSpinner from "../LoadingSpinner";
 
 const Navbar = () => {
   const { loading } = useAuth();
-  const [role] = useRole();
+  const [role, isLoading] = useRole();
   if (loading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner />;
 
   if (role === "employee") {
     return <EmployeeNavbar />;

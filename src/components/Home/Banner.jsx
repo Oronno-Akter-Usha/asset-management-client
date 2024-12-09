@@ -20,7 +20,7 @@ const Banner = () => {
               team effectively.
             </p>
 
-            <Link to="/JoinAsHR">
+            <Link to="/JoinAsHrManager">
               <Button>Join as HR Manager</Button>
             </Link>
           </div>
