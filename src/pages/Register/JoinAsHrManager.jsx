@@ -31,7 +31,7 @@ const JoinAsHrManager = () => {
     const email = form.email.value;
     const password = form.password.value;
     const image = form.image.files[0];
-    const role = "HrManager";
+    const role = "hrManager";
     const company_name = form.company_name.value;
     const company_logo = form.companyImage.files[0];
 
