@@ -1,5 +1,41 @@
 import PropTypes from "prop-types";
+import DeleteModal from "./../Modal/DeleteModal";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 const AssetsListDataRow = ({ asset, refetch }) => {
+  console.log(asset);
+  const axiosSecure = useAxiosSecure();
+  // for delete modal
+  let [isOpen, setIsOpen] = useState(false);
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  // delete
+  const { mutateAsync } = useMutation({
+    mutationFn: async (id) => {
+      const { data } = await axiosSecure.delete(`/asset/${id}`);
+      return data;
+    },
+    onSuccess: (data) => {
+      console.log(data);
+      refetch();
+      toast.success("Successfully deleted.");
+    },
+  });
+
+  // Handle Delete
+  const handleDelete = async (id) => {
+    console.log(id);
+    try {
+      await mutateAsync(id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -33,7 +69,7 @@ const AssetsListDataRow = ({ asset, refetch }) => {
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <button
-          // onClick={() => handleUpdateAsset(asset._id)}
+          onClick={() => setIsOpen(true)}
           className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-red-900 leading-tight"
         >
           <span
@@ -42,6 +78,13 @@ const AssetsListDataRow = ({ asset, refetch }) => {
           ></span>
           <span className="relative">Delete</span>
         </button>
+        {/* Delete modal */}
+        <DeleteModal
+          isOpen={isOpen}
+          closeModal={closeModal}
+          handleDelete={handleDelete}
+          id={asset?._id}
+        />
       </td>
     </tr>
   );

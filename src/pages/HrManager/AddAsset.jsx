@@ -19,7 +19,7 @@ const AddAsset = () => {
       name: form.productName.value,
       quantity: parseInt(form.productQuantity.value, 10), // Ensure quantity is a number
       product_type: form.productType.value,
-      added_by_hr: user?.email,
+      added_by_hrManager: user?.email,
       date: startDate.toISOString(), // Use ISO format for consistent date storage
     };
 
