@@ -16,29 +16,24 @@ const MyEmployee = () => {
     refetch,
     error,
   } = useQuery({
-    queryKey: ["team", user?.email], // the query key
+    queryKey: ["team", user?.email],
     queryFn: async () => {
-      const { data } = await axiosSecure.get("/team", {
-        params: { hrEmail: user?.email },
+      const { data } = await axiosSecure.get("/myEmployee", {
+        params: { email: user?.email },
       });
-      return data.team; // returning the team data
+      console.log("HR Team Data:", data);
+      return data.team;
     },
-    enabled: !!user?.email, // only run the query if user is available
   });
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
-
+  if (isLoading) return <LoadingSpinner />;
   if (error) {
     console.error("Error fetching team:", error);
     toast.error("Failed to load team data.");
     return <p>Error loading team data.</p>;
   }
 
-  if (!team || !Array.isArray(team)) {
-    return <p>No team data available.</p>;
-  }
+  if (!team || team.length === 0) return <p>No team data available.</p>;
 
   return (
     <PageLayout>

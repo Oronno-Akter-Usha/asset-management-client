@@ -11,13 +11,16 @@ const EmployeeNavbar = () => {
         <details className="bg-transparent">
           <summary className="p-0"> Assets</summary>
           <ul className=" bg-base-100 rounded-t-none">
-            <NavLinks title="My Assets" pathName="/my-assets" />
+            <NavLinks
+              title=" My Requested Assets"
+              pathName="/my-requested-assets"
+            />
             <br />
             <NavLinks title="Request for an Asset" pathName="/asset-request" />
           </ul>
         </details>
       </li>
-      <NavLinks title="My Team" pathName="/myTeam"></NavLinks>
+      <NavLinks title="My Team" pathName="/my-team"></NavLinks>
     </>
   );
   return (

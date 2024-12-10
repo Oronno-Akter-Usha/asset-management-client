@@ -50,8 +50,9 @@ const MyEmployeeDataRow = ({ team, refetch }) => {
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <button
           onClick={removeEmployee}
-          disabled={isRemoving} // Disable the button while removing
-          className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-red-900 leading-tight"
+          disabled={user?.email === team?.email || isRemoving} // Disable button if it's the user's own email or while removing
+          className={`relative cursor-pointer inline-block px-3 py-1 font-semibold text-red-900 leading-tight 
+      disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed`}
         >
           <span
             aria-hidden="true"
