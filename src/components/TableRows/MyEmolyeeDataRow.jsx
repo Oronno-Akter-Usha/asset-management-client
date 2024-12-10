@@ -55,7 +55,7 @@ const MyEmployeeDataRow = ({ team, refetch }) => {
         >
           <span
             aria-hidden="true"
-            className="absolute inset-0 bg-red-300 opacity-50 rounded-full"
+            className="absolute inset-0 bg-red-300 opacity-50 rounded-md"
           ></span>
           <span className="relative">
             {isRemoving ? "Removing..." : "Remove"}

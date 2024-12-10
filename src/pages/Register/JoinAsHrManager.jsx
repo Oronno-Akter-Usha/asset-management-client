@@ -64,6 +64,7 @@ const JoinAsHrManager = () => {
         company_logo_url,
         package: selectedPackage,
         date_of_birth: startDate,
+        team: [],
       };
 
       // Save user in database

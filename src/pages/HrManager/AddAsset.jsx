@@ -39,7 +39,7 @@ const AddAsset = () => {
 
   return (
     <PageLayout>
-      <div className="mx-auto w-2/5 bg-white rounded-lg p-5 md:p-10">
+      <div className="mx-auto md:w-2/5 bg-white rounded-lg p-5 md:p-10">
         <h2 className="font-bold text-2xl text-center text-secondary">
           Add an Asset
         </h2>
