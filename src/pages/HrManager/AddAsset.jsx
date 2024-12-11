@@ -9,7 +9,7 @@ import { toast } from "react-hot-toast";
 const AddAsset = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const [startDate] = useState(new Date()); // Set current date by default
+  const [startDate] = useState(new Date());
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,10 +17,10 @@ const AddAsset = () => {
 
     const assetData = {
       name: form.productName.value,
-      quantity: parseInt(form.productQuantity.value, 10), // Ensure quantity is a number
+      quantity: parseInt(form.productQuantity.value),
       product_type: form.productType.value,
       added_by_hrManager: user?.email,
-      date: startDate.toISOString(), // Use ISO format for consistent date storage
+      date: startDate.toISOString(),
     };
 
     try {
@@ -99,10 +99,10 @@ const AddAsset = () => {
                     type="radio"
                     name="productType"
                     className="radio"
-                    value="Non-returnable"
+                    value="Non-Returnable"
                     required
                   />
-                  <span className="ml-2">Non-returnable</span>
+                  <span className="ml-2">Non-Returnable</span>
                 </label>
               </div>
             </div>

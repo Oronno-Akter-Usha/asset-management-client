@@ -16,7 +16,7 @@ const EmployeeNavbar = () => {
               pathName="/my-requested-assets"
             />
             <br />
-            <NavLinks title="Request for an Asset" pathName="/asset-request" />
+            <NavLinks title="Request for an Asset" pathName="/request-asset" />
           </ul>
         </details>
       </li>

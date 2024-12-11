@@ -10,7 +10,7 @@ const MyTeam = () => {
   const axiosSecure = useAxiosSecure();
 
   const {
-    data: { team = [] } = {}, // Ensure 'team' is an empty array by default
+    data: { team = [] } = {},
     isLoading,
     isError,
     refetch,
@@ -20,9 +20,9 @@ const MyTeam = () => {
       const { data } = await axiosSecure.get("/myTeam", {
         params: { email: user?.email },
       });
-      return data; // The API should return { team: [...] }
+      return data;
     },
-    enabled: !!user?.email, // Ensure query runs only when user email is available
+    enabled: !!user?.email,
   });
 
   if (isLoading) {
@@ -45,13 +45,8 @@ const MyTeam = () => {
 
   if (!team.length) {
     return (
-      <div className="text-center text-gray-500 mt-8">
+      <div className="text-lg text-center text-gray-900 flex items-center justify-center flex-col h-screen">
         <p>No team members found.</p>
-        <img
-          src="/empty-state.svg"
-          alt="No Team"
-          className="mx-auto mt-4 w-24 h-24"
-        />
       </div>
     );
   }
