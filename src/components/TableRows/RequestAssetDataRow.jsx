@@ -16,10 +16,12 @@ const RequestAssetDataRow = ({ asset, refetch }) => {
   const handleRequest = async (asset, note) => {
     console.log(asset, note);
     const request = {
-      assetId: asset._id,
+      asset: asset,
       note,
-      requestDate: new Date().toISOString(),
+      request_date: new Date().toISOString(),
+      approval_date: "",
       requestedBy: user?.email,
+      status: "Pending",
     };
     try {
       await axiosSecure.post("/request", request);

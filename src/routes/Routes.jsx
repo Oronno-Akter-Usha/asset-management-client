@@ -10,6 +10,7 @@ import AddAsset from "../pages/HrManager/AddAsset";
 import AssetList from "../pages/HrManager/AssetList";
 import MyTeam from "../pages/Employee/MyTeam";
 import RequestAsset from "../pages/Employee/RequestAsset";
+import MyRequestedAssets from "../pages/Employee/MyRequestedAssets";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "/request-asset",
         element: <RequestAsset />,
+      },
+      {
+        path: "/my-requested-assets",
+        element: <MyRequestedAssets />,
       },
     ],
   },
