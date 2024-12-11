@@ -72,7 +72,7 @@ const MyRequestedAssets = () => {
   return (
     <PageLayout>
       <div className="mx-auto px-4 sm:px-8">
-        <h3 className="text-center font-bold text-2xl text-secondary">
+        <h3 className="text-center font-bold text-2xl text-secondary mb-4">
           Asset List
         </h3>
         <SearchBar handleSearch={handleSearch} />

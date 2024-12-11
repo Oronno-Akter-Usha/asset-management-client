@@ -9,8 +9,10 @@ import MyEmployee from "../pages/HrManager/MyEmployee";
 import AddAsset from "../pages/HrManager/AddAsset";
 import AssetList from "../pages/HrManager/AssetList";
 import MyTeam from "../pages/Employee/MyTeam";
-import RequestAsset from "../pages/Employee/RequestAsset";
 import MyRequestedAssets from "../pages/Employee/MyRequestedAssets";
+import PrivateRoute from "./PrivateRoute";
+import RequestAsset from "../pages/Employee/RequestAsset";
+import HrManagerRoute from "./HrManagerRoute";
 
 const router = createBrowserRouter([
   {
@@ -37,33 +39,70 @@ const router = createBrowserRouter([
       // HR Manager
       {
         path: "/add-employee",
-        element: <AddEmployee />,
+        element: (
+          <PrivateRoute>
+            <HrManagerRoute>
+              <AddEmployee />
+            </HrManagerRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-employee",
-        element: <MyEmployee />,
+        element: (
+          <PrivateRoute>
+            <HrManagerRoute>
+              <MyEmployee />
+            </HrManagerRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/add-asset",
-        element: <AddAsset />,
+        element: (
+          <PrivateRoute>
+            <HrManagerRoute>
+              <AddAsset />
+            </HrManagerRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/asset-list",
-        element: <AssetList />,
+        element: (
+          <PrivateRoute>
+            <HrManagerRoute>
+              {" "}
+              <AssetList />
+            </HrManagerRoute>
+          </PrivateRoute>
+        ),
       },
 
       // Employee
       {
         path: "/my-team",
-        element: <MyTeam />,
+        element: (
+          <PrivateRoute>
+            <MyTeam />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/request-asset",
-        element: <RequestAsset />,
+        element: (
+          <PrivateRoute>
+            <RequestAsset />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-requested-assets",
-        element: <MyRequestedAssets />,
+        element: (
+          <PrivateRoute>
+            <MyRequestedAssets />
+          </PrivateRoute>
+        ),
       },
     ],
   },
