@@ -4,8 +4,8 @@ import PageLayout from "../../components/Shared/PageLayout";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import MyRequestedAssetsDataRow from "../../components/TableRows/MyRequestedAssetsDataRow";
-import SearchBar from "../../components/Shared/SearchBar";
-import Filter from "../../components/Shared/Filter";
+import SearchBar from "./../../components/Shared/SearchBar";
+import Filter from "./../../components/Shared/Filter";
 import { useState } from "react";
 
 const MyRequestedAssets = () => {
@@ -14,9 +14,9 @@ const MyRequestedAssets = () => {
   const [search, setSearch] = useState("");
   const [availability, setAvailability] = useState("");
   const [type, setType] = useState("");
+
   const userEmail = user?.email;
 
-  // Fetch requested-assets data
   const {
     data: requestedAssets,
     isLoading,
@@ -26,21 +26,25 @@ const MyRequestedAssets = () => {
   } = useQuery({
     queryKey: ["requested-assets", search, availability, type, userEmail],
     queryFn: async () => {
-      console.log("Request Parameters:", {
+      console.log("Querying with parameters:", {
         search,
         availability,
         type,
         userEmail,
       });
-      const { data } = await axiosSecure.get(
-        `/requested-assets/${user?.email}`,
-        {
-          params: { search, availability, type },
-        }
-      );
+      const { data } = await axiosSecure.get(`/requested-assets`, {
+        params: { search, availability, type, userEmail },
+      });
+      console.log("Fetched Data:", data);
       return data;
     },
   });
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearch(e.target.search.value);
+    e.target.search.value = "";
+  };
 
   if (isLoading) return <LoadingSpinner />;
 
@@ -50,7 +54,7 @@ const MyRequestedAssets = () => {
         <div className="text-center text-red-600">
           <p>Failed to load requested assets.</p>
           <p>
-            Error:
+            Error:{" "}
             {error?.response?.data?.message ||
               error?.message ||
               "Unknown error"}
@@ -60,20 +64,13 @@ const MyRequestedAssets = () => {
     );
   }
 
-  // Ensure requestedAssets is an array to avoid errors
   const assetsArray = Array.isArray(requestedAssets) ? requestedAssets : [];
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setSearch(e.target.search.value);
-    e.target.search.value = "";
-  };
 
   return (
     <PageLayout>
       <div className="mx-auto px-4 sm:px-8">
         <h3 className="text-center font-bold text-2xl text-secondary mb-4">
-          Asset List
+          My Requested Assets
         </h3>
         <SearchBar handleSearch={handleSearch} />
         <Filter

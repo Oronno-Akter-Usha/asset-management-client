@@ -4,7 +4,23 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import UpdateModal from "./../Modal/UpdateModal";
 const AssetsListDataRow = ({ asset, refetch }) => {
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [selectedAsset, setSelectedAsset] = useState(null);
+
+  const openUpdateModal = (asset) => {
+    setSelectedAsset(asset);
+    setIsUpdateModalOpen(true);
+  };
+
+  const closeUpdateModal = () => setIsUpdateModalOpen(false);
+
+  const handleUpdate = (updatedAssetData) => {
+    console.log("Updated Asset Data:", updatedAssetData);
+    // Call your update API here
+  };
+
   console.log(asset);
   const axiosSecure = useAxiosSecure();
   // for delete modal
@@ -57,7 +73,7 @@ const AssetsListDataRow = ({ asset, refetch }) => {
 
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <button
-          // onClick={() => handleUpdateAsset(asset._id)}
+          onClick={() => openUpdateModal(asset)}
           className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
         >
           <span
@@ -66,6 +82,13 @@ const AssetsListDataRow = ({ asset, refetch }) => {
           ></span>
           <span className="relative">Update</span>
         </button>
+        <UpdateModal
+          isOpen={isUpdateModalOpen}
+          closeModal={closeUpdateModal}
+          handleUpdate={handleUpdate}
+          refetch={refetch}
+          assetData={selectedAsset || {}}
+        />
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <button

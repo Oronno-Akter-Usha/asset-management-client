@@ -4,26 +4,47 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 import AssetsListDataRow from "../../components/TableRows/AssetsListDataRow";
+import Filter from "./../../components/Shared/Filter";
+import SearchBar from "./../../components/Shared/SearchBar";
+import { useState } from "react";
 
 const AssetList = () => {
-  const { user } = useAuth(); // Get the logged-in user
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [search, setSearch] = useState("");
+  const [availability, setAvailability] = useState("");
+  const [type, setType] = useState("");
+  const userEmail = user?.email;
 
-  // Fetch assets data
+  // Fetch assets data with filters
   const {
     data: assets = [],
     isLoading,
     error,
     refetch,
   } = useQuery({
-    queryKey: ["assets", user?.email],
+    queryKey: ["assets", search, availability, type, userEmail],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/assets/${user?.email}`);
-      console.log(data);
+      console.log("Querying assets with filters:", {
+        search,
+        availability,
+        type,
+        userEmail,
+      });
+      const { data } = await axiosSecure.get(`/assets`, {
+        params: { search, availability, type, userEmail },
+      });
+      console.log("Fetched Assets:", data);
       return data;
     },
     enabled: !!user?.email,
   });
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearch(e.target.search.value);
+    e.target.search.value = "";
+  };
 
   // Handle loading state
   if (isLoading) return <LoadingSpinner />;
@@ -45,6 +66,14 @@ const AssetList = () => {
         <h3 className="text-center font-bold text-2xl text-secondary">
           Asset List
         </h3>
+
+        <SearchBar handleSearch={handleSearch} />
+        <Filter
+          availability={availability}
+          setAvailability={setAvailability}
+          type={type}
+          setType={setType}
+        />
         <div className="py-8">
           <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
             <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
