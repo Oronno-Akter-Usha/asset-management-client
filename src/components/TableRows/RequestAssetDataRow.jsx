@@ -17,6 +17,7 @@ const RequestAssetDataRow = ({ asset, refetch }) => {
     console.log(asset, note);
     const request = {
       asset: asset,
+      added_by_hrManager: asset.added_by_hrManager,
       note,
       request_date: new Date().toISOString(),
       approval_date: "",

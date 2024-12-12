@@ -92,6 +92,8 @@ const MyRequestedAssetsDataRow = ({ requestedAsset, refetch }) => {
               ? "text-yellow-500"
               : requestedAsset?.status === "Approved"
               ? "text-green-500"
+              : requestedAsset?.status === "Rejected"
+              ? "text-red-500"
               : requestedAsset?.status === "Returned"
               ? "text-blue-500"
               : requestedAsset?.status === "Cancelled"
@@ -136,6 +138,7 @@ const MyRequestedAssetsDataRow = ({ requestedAsset, refetch }) => {
                 onClick={() => {
                   setIsReturning(true);
                   returnAsset.mutate();
+                  refetch();
                 }}
                 disabled={isReturning}
                 className="ml-2 bg-yellow-400 text-white py-1 px-2 rounded-md"
