@@ -63,7 +63,9 @@ const AssetsListDataRow = ({ asset, refetch }) => {
         </p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <p className="text-gray-900 whitespace-no-wrap">{asset?.quantity}</p>
+        <p className="text-gray-900 whitespace-no-wrap">
+          {asset.quantity > 0 ? "Available" : "Out of Stock"}
+        </p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <p className="text-gray-900 whitespace-no-wrap">
