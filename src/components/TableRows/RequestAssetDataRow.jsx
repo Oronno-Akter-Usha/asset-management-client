@@ -21,6 +21,7 @@ const RequestAssetDataRow = ({ asset, refetch }) => {
       request_date: new Date().toISOString(),
       approval_date: "",
       requestedBy: user?.email,
+      requesterName: user?.displayName,
       status: "Pending",
     };
     try {

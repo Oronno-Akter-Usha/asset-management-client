@@ -13,7 +13,7 @@ import MyRequestedAssets from "../pages/Employee/MyRequestedAssets";
 import PrivateRoute from "./PrivateRoute";
 import RequestAsset from "../pages/Employee/RequestAsset";
 import HrManagerRoute from "./HrManagerRoute";
-// import AllRequests from "../pages/HrManager/AllRequests";
+import AllRequests from "../pages/HrManager/AllRequests";
 
 const router = createBrowserRouter([
   {
@@ -78,16 +78,16 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      // {
-      //   path: "/all-requests",
-      //   element: (
-      //     <PrivateRoute>
-      //       <HrManagerRoute>
-      //         <AllRequests />
-      //       </HrManagerRoute>
-      //     </PrivateRoute>
-      //   ),
-      // },
+      {
+        path: "/all-requests",
+        element: (
+          <PrivateRoute>
+            <HrManagerRoute>
+              <AllRequests />
+            </HrManagerRoute>
+          </PrivateRoute>
+        ),
+      },
 
       // Employee
       {
